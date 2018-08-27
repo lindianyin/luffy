@@ -1,6 +1,5 @@
 #luffy
 #General game development framework
-
          lobby <-----------------+
            ^                     |
            |                     |
