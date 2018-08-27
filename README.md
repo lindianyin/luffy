@@ -1,3 +1,3 @@
 # luffy
-## a General game development framework
+## A General game development framework
 
