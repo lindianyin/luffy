@@ -18,6 +18,7 @@ local function echoHandler(skt)
 end
 
 local server = socket.bind("localhost", 20000)
+local server = socket.bind("localhost", 20001)
 
 copas.addserver(server, echoHandler)
 
