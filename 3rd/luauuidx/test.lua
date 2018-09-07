@@ -1,0 +1,5 @@
+local luauuidx=require("luauuidx")
+local uuid = luauuidx.uuid_generate_random()
+print("uuid="..uuid)
+local uuid = luauuidx.uuid_generate_time()
+print("uuid="..uuid)
