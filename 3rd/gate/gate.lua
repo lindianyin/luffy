@@ -3,24 +3,73 @@
 socket = require('socket')
 copas = require('copas')
 zklua = require("zklua")
+uuidx = require("luauuidx")
 
 server = socket.bind('*',7788)
 print(server:getsockname())
 
+connections = {}
+
+function process_command(connid,socket,argc,argv) 
+	print(connid,socket,argc,argv[1],argv[2])
+	if(argc==2 and argv[1] == "exec") then
+		local ret =  loadstring(argv[2])()	
+		socket:send(":"..ret.."\r\n")
+	end	
+end
+
+
 function handler(socket)
     local socket = copas.wrap(socket)
-	print("connect")
+	local connid = uuidx.uuid_generate_time()
+	local socketdata = {socket=socket,connecttime=os.time()}
+	connections[connid] = socketdata
+	print("connection connect connid="..connid)
 	local i = 0
+	local argc = nil
+	local argv = {}
+	local argvlen = nil
     while true do
         local data = socket:receive("*l")
         if not data then
 			print("close")
             break
         end
-		i = i + 1
-        socket:send(i .. data .. '\r\n')
-		print(data)
+		--http://doc.redisfans.com/topic/protocol.html
+		data = data .. "\r\n"	
+		if(not argc) then 
+			argc = tonumber(string.match(data,"^%*(%d+)\r\n"))	
+			print("argc="..argc)
+		else
+			if(not argvlen) then 
+				argvlen = tonumber(string.match(data,"^%$(%d+)\r\n"))		
+				print("argvlen="..argvlen)
+			else
+				print("data="..data)
+				argv[#argv+1] = string.sub(data,1,-3)
+				argvlen = nil
+				if(argc == #argv) then
+					for k,v in pairs(argv) do 
+						print(k,v)
+			 		end
+					process_command(connid,socket,argc,argv)
+					argc = nil
+					argv = {}	
+					--for _,v in pairs(connections) do 
+					--	v.socket:send(connid .. data)
+					--end
+				end	
+
+			end
+		end
     end
+	connections[connid] = nil
+	local connect_count = 0
+	for _,v in pairs(connections) do 
+		connect_count = connect_count + 1
+	end	
+	local online_time = os.time() - socketdata.connecttime
+	print("connection close connid= ".. connid .." connect_count="..connect_count .. " online_time="..online_time)
 end
 
 copas.addserver(server, handler)
