@@ -25,36 +25,44 @@ function handler(socket)
 	local socketdata = {socket=socket,connecttime=os.time()}
 	connections[connid] = socketdata
 	print("connection connect connid="..connid)
+	local i = 0
+	local argc = nil
+	local argv = {}
+	local argvlen = nil
     while true do
-		--http://doc.redisfans.com/topic/protocol.html
-		local argc = nil
-		local argv = {}
-		local argvlen = nil
-        local _argc = socket:receive("*l")
-        if not _argc then
+        local data = socket:receive("*l")
+        if not data then
 			print("close")
             break
         end
-		_argc = _argc .. "\r\n"
-		argc = tonumber(string.match(_argc,"^%*(%d+)\r\n"))	
-		print("argc="..argc)
-		
-		for i=1,argc do
-        	local _argvlen = socket:receive("*l")
-        	if not _argvlen then
-				print("close")
-            	break
+		--http://doc.redisfans.com/topic/protocol.html
+		data = data .. "\r\n"	
+		if(not argc) then 
+			argc = tonumber(string.match(data,"^%*(%d+)\r\n"))	
+			print("argc="..argc)
+		else
+			if(not argvlen) then 
+				argvlen = tonumber(string.match(data,"^%$(%d+)\r\n"))		
+				print("argvlen="..argvlen)
+			else
+				print("data="..data)
+				argv[#argv+1] = string.sub(data,1,-3)
+				argvlen = nil
+				if(argc == #argv) then
+					for k,v in pairs(argv) do 
+						print(k,v)
+			 		end
+					process_command(connid,socket,argc,argv)
+					argc = nil
+					argv = {}	
+					--for _,v in pairs(connections) do 
+					--	v.socket:send(connid .. data)
+					--end
+				end	
+
 			end
-			_argvlen = _argvlen .. "\r\n"
-			argvlen = tonumber(string.match(_argvlen,"^%$(%d+)\r\n"))		
-			print("argvlen="..argvlen)
-			local _argv = socket:receive(argvlen+2)	
-			_argv = string.match(_argv,"(.*)\r\n")
-			print("argv=".._argv)
-			argv[#argv+1] = _argv
-        end
-		process_command(connid,socket,argc,argv)
-	end
+		end
+    end
 	connections[connid] = nil
 	local connect_count = 0
 	for _,v in pairs(connections) do 

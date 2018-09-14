@@ -1,11 +1,11 @@
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@log_env@712: Client environment:zookeeper.version=zookeeper C client 3.4.6
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@log_env@716: Client environment:host.name=kafka01
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@log_env@723: Client environment:os.name=Linux
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@log_env@724: Client environment:os.arch=2.6.32-642.el6.x86_64
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@log_env@725: Client environment:os.version=#1 SMP Tue May 10 17:27:01 UTC 2016
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@log_env@733: Client environment:user.name=root
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@log_env@741: Client environment:user.home=/root
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@log_env@753: Client environment:user.dir=/root/luatest/gate
-2018-09-12 07:34:43,336:9561(0x7fcf15f46700):ZOO_INFO@zookeeper_init@786: Initiating client connection, host=127.0.0.1:2181 sessionTimeout=10000 watcher=0x7fcf15b21b60 sessionId=0 sessionPasswd=<null> context=0x7cd940 flags=0
-2018-09-12 07:34:43,337:9561(0x7fcf156f9700):ZOO_INFO@check_events@1705: initiated connection to server [127.0.0.1:2181]
-2018-09-12 07:34:43,339:9561(0x7fcf156f9700):ZOO_INFO@check_events@1752: session establishment complete on server [127.0.0.1:2181], sessionId=0x165c07dd53d0035, negotiated timeout=10000
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@log_env@712: Client environment:zookeeper.version=zookeeper C client 3.4.6
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@log_env@716: Client environment:host.name=kafka01
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@log_env@723: Client environment:os.name=Linux
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@log_env@724: Client environment:os.arch=2.6.32-642.el6.x86_64
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@log_env@725: Client environment:os.version=#1 SMP Tue May 10 17:27:01 UTC 2016
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@log_env@733: Client environment:user.name=root
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@log_env@741: Client environment:user.home=/root
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@log_env@753: Client environment:user.dir=/root/luatest/gate
+2018-09-13 07:39:43,855:10915(0x7f78ce8b9700):ZOO_INFO@zookeeper_init@786: Initiating client connection, host=127.0.0.1:2181 sessionTimeout=10000 watcher=0x7f78ce494b60 sessionId=0 sessionPasswd=<null> context=0x1bb5f40 flags=0
+2018-09-13 07:39:43,856:10915(0x7f78ce06c700):ZOO_INFO@check_events@1705: initiated connection to server [127.0.0.1:2181]
+2018-09-13 07:39:43,857:10915(0x7f78ce06c700):ZOO_INFO@check_events@1752: session establishment complete on server [127.0.0.1:2181], sessionId=0x165c07dd53d003a, negotiated timeout=10000
